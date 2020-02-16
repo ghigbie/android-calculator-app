@@ -12,6 +12,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var newNumber: EditText
     private val displayOperation by lazy {findViewById<TextView>(R.id.operation)}
 
+    private var operand1: Double? = null
+    private var operand2: Double = 0.0
+    private var pendingOperation = "="
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -50,5 +55,21 @@ class MainActivity : AppCompatActivity() {
             button.setOnClickListener(listener)
         }
 
+        val opListener = View.OnClickListener { v ->
+            val op = (v as Button).text.toString()
+            val value = newNumber.text.toString()
+            if(value.isNotEmpty()) {
+               // performOperation(value, op)
+            }
+            pendingOperation = op
+            displayOperation.text = pendingOperation
+        }
+
+        val operationButtons: ArrayList<Button> = arrayListOf( buttonEquals, buttonDivide,
+            buttonMultiply, buttonMinus)
+
+        for(button in operationButtons){
+            button.setOnClickListener(opListener)
+        }
     }
 }
