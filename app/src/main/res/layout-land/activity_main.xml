@@ -40,7 +40,7 @@
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="true"
-        android:inputType="numberSigned"
+        android:inputType="numberDecimal"
         app:layout_constraintBaseline_toBaselineOf="@+id/result"
         app:layout_constraintEnd_toStartOf="@+id/result"
         app:layout_constraintStart_toStartOf="parent" />
