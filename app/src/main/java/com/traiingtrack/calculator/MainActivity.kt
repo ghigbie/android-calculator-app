@@ -1,11 +1,11 @@
 package com.traiingtrack.calculator
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var result: EditText
@@ -16,6 +16,9 @@ class MainActivity : AppCompatActivity() {
     private var operand2: Double = 0.0
     private var pendingOperation = "="
 
+    private fun performOperation(value: String, operation: String) {
+        displayOperation.text = operation
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,28 +51,33 @@ class MainActivity : AppCompatActivity() {
             newNumber.append(b.text)
         }
 
-        val dataButtons: ArrayList<Button> = arrayListOf(button0, button1, button2, button3,
-            button4, button5, button6, button7, button8, button9, buttonDot)
+        val dataButtons: ArrayList<Button> = arrayListOf(
+            button0, button1, button2, button3,
+            button4, button5, button6, button7, button8, button9, buttonDot
+        )
 
-        for(button in dataButtons) {
+        for (button in dataButtons) {
             button.setOnClickListener(listener)
         }
 
         val opListener = View.OnClickListener { v ->
             val op = (v as Button).text.toString()
             val value = newNumber.text.toString()
-            if(value.isNotEmpty()) {
-               // performOperation(value, op)
+            if (value.isNotEmpty()) {
+                performOperation(value, op)
             }
             pendingOperation = op
             displayOperation.text = pendingOperation
         }
 
-        val operationButtons: ArrayList<Button> = arrayListOf( buttonEquals, buttonDivide,
-            buttonMultiply, buttonMinus)
+        val operationButtons: ArrayList<Button> = arrayListOf(
+            buttonEquals, buttonDivide,
+            buttonMultiply, buttonMinus
+        )
 
-        for(button in operationButtons){
+        for (button in operationButtons) {
             button.setOnClickListener(opListener)
         }
+
     }
 }
